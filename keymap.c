@@ -2,9 +2,9 @@
 #include "oneshot.h"
 
 enum layers {
-  _GALLIUM_V2,
   _GALLIUM,
   _RECURVA,
+  _SEMIMAKJQ,
   _QWERTY,
   _LOWER,
   _RAISE,
@@ -26,13 +26,6 @@ enum keycodes {
 #define RAISE MO(_RAISE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_GALLIUM_V2] = LAYOUT_split_3x6_3(
-    KC_NO, KC_B, KC_L, KC_D, KC_W, KC_V,    KC_J, KC_F, KC_O,    KC_U,    KC_COMM, KC_NO,
-    KC_NO, KC_N, KC_R, KC_T, KC_S, KC_G,    KC_Y, KC_H, KC_A,    KC_E,    KC_I,    KC_NO, 
-    KC_NO, KC_X, KC_Q, KC_M, KC_C, KC_Z,    KC_K, KC_P, KC_QUOT, KC_COLN, KC_DOT,  KC_NO,
-                KC_LALT, LOWER, OS_SHFT,    KC_SPC, RAISE, KC_LGUI
-  ),
-
   [_GALLIUM] = LAYOUT_split_3x6_3(
     KC_NO, KC_B, KC_L, KC_D, KC_W, KC_V,    KC_J, KC_Y, KC_O,    KC_U,    KC_COMM, KC_NO,
     KC_NO, KC_N, KC_R, KC_T, KC_S, KC_G,    KC_P, KC_H, KC_A,    KC_E,    KC_I,    KC_NO, 
@@ -47,6 +40,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_LALT, LOWER, OS_SHFT,    KC_SPC, RAISE, KC_LGUI
   ),
 
+  [_SEMIMAKJQ] = LAYOUT_split_3x6_3(
+    KC_NO, KC_F, KC_L, KC_H, KC_V, KC_Z,    KC_QUOT, KC_W, KC_U,    KC_O,   KC_Y,    KC_NO,
+    KC_NO, KC_S, KC_R, KC_N, KC_T, KC_K,    KC_G,    KC_D, KC_E,    KC_A,   KC_I,    KC_NO,
+    KC_NO, KC_X, KC_J, KC_B, KC_M, KC_Q,    KC_P,    KC_C, KC_COMM, KC_DOT, KC_COLN, KC_NO,
+                KC_LALT, LOWER, OS_SHFT,    KC_SPC, RAISE, KC_LGUI
+  ),
+  
   [_QWERTY] = LAYOUT_split_3x6_3(    
     KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,    KC_Y, KC_U, KC_I,    KC_O,   KC_P,    KC_NO,
     KC_NO, KC_A, KC_S, KC_D, KC_F, KC_G,    KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, KC_NO,
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
-    KC_NO, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,   KC_7,    KC_8,   KC_9,    KC_0,    KC_NO,
+    KC_NO, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,   KC_9,    KC_0,    KC_NO,
     KC_NO, OS_CTRL, OS_ALT,  OS_CMD,  OS_SHFT, KC_PERC,    KC_ESC, KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT, KC_NO, 
     KC_NO, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY,    KC_DEL, KC_BSPC, KC_TAB, KC_ENT,  KC_SCLN, KC_NO,
                                _______, _______, _______,   _______, _______, G(KC_SPC)
@@ -76,9 +76,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   
   [_F_ROW] = LAYOUT_split_3x6_3(
-    KC_NO, KC_F1, KC_F2,  KC_F3,  KC_F4,  DF(_GALLIUM_V2),    TG(_GAME),    _______, _______, _______, QK_BOOT, KC_NO,
-    KC_NO, KC_F5, KC_F6,  KC_F7,  KC_F8,  DF(_QWERTY),        DF(_GALLIUM), KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO, 
-    KC_NO, KC_F9, KC_F10, KC_F11, KC_F12, DF(_RECURVA),       _______,      KC_BRMD, KC_BRMU, _______, _______, KC_NO,
+    KC_NO, KC_F1, KC_F2,  KC_F3,  KC_F4,  DF(_GALLIUM),       TG(_GAME), _______, _______, _______, QK_BOOT, KC_NO,
+    KC_NO, KC_F5, KC_F6,  KC_F7,  KC_F8,  DF(_QWERTY),        DF(_SEMIMAKJQ),   KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO, 
+    // KC_NO, KC_F9, KC_F10, KC_F11, KC_F12, _______,            _______,   KC_BRMD, KC_BRMU, _______, _______, KC_NO,
+    KC_NO, KC_F9, KC_F10, KC_F11, KC_F12, DF(_RECURVA),       _______,   KC_BRMD, KC_BRMU, _______, _______, KC_NO,
                                _______, _______, _______,     _______, _______, _______
   ),
   
@@ -109,10 +110,9 @@ const uint16_t PROGMEM comboRecurvaGBspc[] = { KC_K, KC_X, KC_QUOT, KC_COLN, COM
 
 const uint16_t PROGMEM comboGalGBspc[] = { KC_Q, KC_M, KC_QUOT, KC_COLN, COMBO_END};
 const uint16_t PROGMEM comboGalEsc[] = { KC_C, KC_M, COMBO_END};
-const uint16_t PROGMEM comboGalEnt[] = { KC_QUOT, KC_P, COMBO_END};
-const uint16_t PROGMEM comboGalEnt2[] = { KC_QUOT, KC_F, COMBO_END};
-const uint16_t PROGMEM comboGalScln[] = { KC_QUOT, KC_COLN, COMBO_END};
-const uint16_t PROGMEM comboGalComm[] = { KC_DOT, KC_COLN, COMBO_END};
+const uint16_t PROGMEM comboGalEnt[] = { KC_QUOT, KC_F, COMBO_END};
+const uint16_t PROGMEM comboGalBsps[] = { KC_QUOT, KC_COLN, COMBO_END};
+const uint16_t PROGMEM comboGalSemi[] = { KC_DOT, KC_COLN, COMBO_END};
 const uint16_t PROGMEM comboGalCBspc[] = { KC_Q, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
@@ -128,10 +128,9 @@ combo_t key_combos[] = {
 
     COMBO(comboGalGBspc, G(KC_BSPC)),
     COMBO(comboGalEsc,  KC_ESCAPE),
-    COMBO(comboGalScln, KC_BSPC),
+    COMBO(comboGalBsps, KC_BSPC),
     COMBO(comboGalEnt,  KC_ENTER),
-    COMBO(comboGalEnt2,  KC_ENTER),
-    COMBO(comboGalComm, KC_COMM),
+    COMBO(comboGalSemi, KC_SCLN),
     COMBO(comboGalCBspc, A(KC_BSPC)),
 };
 
